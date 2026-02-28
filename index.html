@@ -2,55 +2,79 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>AssmM4 | السلطان الرقمي</title>
+    <title>AssmM4 | مصنع الأكواد العالمي</title>
     <style>
-        body { background-color: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; overflow: hidden; margin: 0; }
-        #canvas { position: absolute; top: 0; left: 0; z-index: -1; }
-        .content { position: relative; z-index: 1; padding: 50px; text-align: center; background: rgba(0, 0, 0, 0.7); height: 100vh; }
-        h1 { font-size: 3rem; text-shadow: 0 0 10px #0f0; letter-spacing: 5px; }
-        .status-box { border: 1px solid #0f0; padding: 20px; display: inline-block; margin-top: 20px; box-shadow: 0 0 15px #0f0; }
-        .glitch { animation: glitch 1s linear infinite; }
-        @keyframes glitch { 2% { color: #fff; } 4% { color: #0f0; } 8% { color: #f00; } }
-        .btn { border: 1px solid #0f0; color: #0f0; padding: 10px 30px; text-decoration: none; display: inline-block; margin-top: 30px; transition: 0.5s; }
-        .btn:hover { background: #0f0; color: #000; box-shadow: 0 0 20px #0f0; }
+        body { background-color: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 20px; }
+        .container { border: 1px solid #0f0; padding: 20px; background: rgba(0, 10, 0, 0.9); box-shadow: 0 0 20px #0f0; max-width: 800px; margin: auto; }
+        h1 { text-shadow: 0 0 10px #0f0; font-size: 2.5rem; }
+        .section { border-top: 1px solid #0f0; margin-top: 20px; padding-top: 20px; }
+        textarea { width: 90%; height: 150px; background: #000; color: #0f0; border: 1px solid #0f0; font-family: monospace; padding: 10px; margin-top: 10px; }
+        input, select { background: #000; border: 1px solid #0f0; color: #0f0; padding: 10px; margin: 5px; }
+        .btn { border: 1px solid #0f0; color: #0f0; padding: 10px 20px; cursor: pointer; transition: 0.5s; display: inline-block; margin: 10px; }
+        .btn:hover { background: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
+        .secret-link { color: #050; text-decoration: none; font-size: 10px; }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <div class="content">
-        <h1 class="glitch">ASSMM4 SOVEREIGN</h1>
-        <div class="status-box">
-            <p>[ SYSTEM STATUS: ACTIVE ]</p>
-            <p>[ OWNER: ASSM MSSTO ]</p>
-            <p>[ CORE: V3.0 ARCHITECT ]</p>
+    <div class="container">
+        <h1>ASSMM4 | CODE ARCHITECT</h1>
+        <p>نظام توليد الأكواد التلقائي - متاح للعامة بإشراف السلطان</p>
+
+        <div class="section">
+            <h3>[ مُولد الأكواد الذكي ]</h3>
+            <p>اختر اللغة واكتب اسمك لتوليد سكربت خاص بك:</p>
+            <input type="text" id="userName" placeholder="اسم المبرمج">
+            <select id="lang">
+                <option value="py">Python</option>
+                <option value="html">HTML</option>
+                <option value="sh">Bash Script</option>
+            </select>
+            <br>
+            <div class="btn" onclick="generateCode()">توليد الكود الآن</div>
+            <br>
+            <textarea id="output" readonly placeholder="الكود المولد سيظهر هنا..."></textarea>
+            <br>
+            <div class="btn" onclick="copyCode()">نسخ الكود</div>
         </div>
-        <br>
-        <p>مرحباً بك في القلعة الرقمية.. هنا تُصنع الأكواد وتُحكم الأنظمة.</p>
-        <a href="https://github.com/assmmsto" class="btn">دخول السيرفر الرئيسي</a>
+
+        <div class="section">
+            <p>جميع الحقوق محفوظة لـ Assm Mssto &copy; 2026</p>
+            <a href="#" onclick="showSecret()" class="secret-link">دخول المنطقة المظلمة</a>
+        </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0f0';
-            ctx.font = fontSize + 'px arial';
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
+        function generateCode() {
+            const name = document.getElementById('userName').value || "Sultan_User";
+            const lang = document.getElementById('lang').value;
+            let code = "";
+
+            if(lang === "py") {
+                code = "# Generated by AssmM4\nimport sys\nprint('مرحباً " + name + "')\nprint('تم توليد هذا الكود بواسطة نظام السلطان الرقمي')\n# ابدأ برمجتك هنا";
+            } else if(lang === "html") {
+                code = "\n<html>\n<body>\n<h1>Welcome " + name + "</h1>\n<p>Powered by AssmM4 Sovereign System</p>\n</body>\n</html>";
+            } else if(lang === "sh") {
+                code = "#!/bin/bash\necho 'AssmM4 Security Shield'\necho 'Welcome " + name + "'\n# Authorized access only";
+            }
+            document.getElementById('output').value = code;
+        }
+
+        function copyCode() {
+            const copyText = document.getElementById("output");
+            copyText.select();
+            document.execCommand("copy");
+            alert("تم نسخ الكود بنجاح!");
+        }
+
+        function showSecret() {
+            let p = prompt("أدخل مفتاح التشفير للوصول للمنطقة السرية:");
+            if(p === "Sultan99") {
+                alert("أهلاً بك يا سلطان في منطقة الظل.. جاري التحويل.");
+                // هنا يمكنك إضافة رابط لصفحة سرية أخرى أو إظهار أدوات مخفية
+            } else {
+                alert("محاولة فاشلة! تم تسجيل عنوانك.");
             }
         }
-        setInterval(draw, 33);
     </script>
 </body>
 </html>
