@@ -2,21 +2,55 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>AssmM4 - القلعة الرقمية</title>
+    <title>AssmM4 | السلطان الرقمي</title>
     <style>
-        body { background-color: #0d1117; color: #58a6ff; font-family: sans-serif; text-align: center; padding: 50px; }
-        .box { border: 2px solid #238636; padding: 20px; border-radius: 10px; display: inline-block; }
-        h1 { color: #238636; }
-        .btn { background: #238636; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        body { background-color: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; overflow: hidden; margin: 0; }
+        #canvas { position: absolute; top: 0; left: 0; z-index: -1; }
+        .content { position: relative; z-index: 1; padding: 50px; text-align: center; background: rgba(0, 0, 0, 0.7); height: 100vh; }
+        h1 { font-size: 3rem; text-shadow: 0 0 10px #0f0; letter-spacing: 5px; }
+        .status-box { border: 1px solid #0f0; padding: 20px; display: inline-block; margin-top: 20px; box-shadow: 0 0 15px #0f0; }
+        .glitch { animation: glitch 1s linear infinite; }
+        @keyframes glitch { 2% { color: #fff; } 4% { color: #0f0; } 8% { color: #f00; } }
+        .btn { border: 1px solid #0f0; color: #0f0; padding: 10px 30px; text-decoration: none; display: inline-block; margin-top: 30px; transition: 0.5s; }
+        .btn:hover { background: #0f0; color: #000; box-shadow: 0 0 20px #0f0; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>AssmM4 - نظام السيادة الرقمية</h1>
-        <p>مرحباً بك يا سلطان (Assm Mssto) في مصنع الأكواد العالمي.</p>
-        <p>هذا الموقع يعمل مباشرة من مستودع GitHub الخاص بك.</p>
+    <canvas id="canvas"></canvas>
+    <div class="content">
+        <h1 class="glitch">ASSMM4 SOVEREIGN</h1>
+        <div class="status-box">
+            <p>[ SYSTEM STATUS: ACTIVE ]</p>
+            <p>[ OWNER: ASSM MSSTO ]</p>
+            <p>[ CORE: V3.0 ARCHITECT ]</p>
+        </div>
         <br>
-        <a href="https://github.com/assmmsto" class="btn">زيارة الملف الشخصي</a>
+        <p>مرحباً بك في القلعة الرقمية.. هنا تُصنع الأكواد وتُحكم الأنظمة.</p>
+        <a href="https://github.com/assmmsto" class="btn">دخول السيرفر الرئيسي</a>
     </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px arial';
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+    </script>
 </body>
 </html>
